@@ -6,6 +6,12 @@
 > 面向 **vivo / OriginOS** 机型（实测 vivo X200 / Android 16），替换系统级语音助手入口，
 > 不切换前台应用、不打断你正在用的 App。
 
+## 演示视频
+
+▶️ **[点这里看演示（GitHub 内置播放器）](media/demo.mp4)** · 5MB · 录制于 2026-11-08
+
+演示内容：双击电源键唤起悬浮胶囊 → 说话（实时字幕）→ 本地 0.6B 逐字作答 → 转交 DSH 时卡片继续更新。
+
 ## 特性
 
 - **悬浮胶囊 + 全屏边缘流光**：应用级悬浮窗（`TYPE_APPLICATION_OVERLAY`），Siri/Apple Intelligence 风格
