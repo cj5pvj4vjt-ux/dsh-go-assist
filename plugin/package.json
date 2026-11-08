@@ -1,0 +1,25 @@
+{
+  "name": "@local/engine-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Answers DSH Go voice-assistant turns inside the running engine process",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "asr-server.mjs",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# 工具链（体积大，按需下载）
+app/tools/*.jar
+app/build/
+app/out/
+plugin/node_modules/
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,28 @@
+- insert:
+    - id: engine-bridge
+      name: '@local/engine-bridge'
+      config:
+        httpEnabled: true
+        httpHost: 127.0.0.1
+        httpPort: 18081
+        watchInbox: true
+        inboxDir: /sdcard/Android/media/com.dshgo.assist/dsh-inbox
+        outboxDir: /sdcard/Android/media/com.dshgo.assist/dsh-outbox
+        workspace: /root/voice-assistant
+        pollMs: 1000
+        asrEnabled: true
+        # 复用引擎自带的语音服务（speech-to-text-sensevoice），只保留一份模型：
+        # 桥接模式不再 spawn 自带的 asr-server.mjs，18080 由插件进程内的 HTTP 桥应答，
+        # 把请求转给 ctx.speechToText。assist-apk 的地址和令牌都不用改。
+        asrMode: bridge
+        asrHost: 127.0.0.1
+        asrPort: 18080
+        asrToken: dshassist
+        routerEnabled: true
+        routerHost: 127.0.0.1
+        routerPort: 18085
+        routerModel: /sdcard/Download/Qwen3-0.6B-Q8_0.gguf
+        # 流式旁路：生成过程中把累计文本写到 <outbox>/<name>.partial.txt（150ms 节流），
+        # 最终回答仍是一次性写 <outbox>/<name>.txt，partial 在写完 final 后删除。
+        partialEnabled: false
+        partialThrottleMs: 150

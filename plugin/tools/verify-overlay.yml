@@ -1,0 +1,43 @@
+# Verification overlay for engine-bridge: applied with --patch only, so no profile
+# file is touched. It re-points the bridge and its two supervised services at
+# throwaway ports/dirs, leaving the real 18080 / 18081 / 18085 alone.
+# Boot it against a THROWAWAY $DSH_HOME (see README) on a spare port.
+#
+# Use the `insert` block below only while the package is NOT installed in the profile
+# (it loads index.js by absolute path). Once installed, delete that block: the bundle's
+# own cordis.patch.yml already inserts the same row id.
+- id: agent-default-model
+  config:
+    provider: custom-aiping
+    model: DeepSeek-V4.1-Flash
+    rememberLastSelection: false
+- id: llm-pi-ai
+  config:
+    providers:
+      custom-aiping:
+        displayName: aiping.cn
+        api: openai-completions
+        baseURL: https://aiping.cn/api/v1
+        apiKeyEnv: CUSTOM_AIPING_API_KEY
+        models:
+          - id: DeepSeek-V4.1-Flash
+- insert:
+    - id: engine-bridge
+      name: /root/workspace/engine-bridge/index.js
+      config:
+        httpEnabled: true
+        httpHost: 127.0.0.1
+        httpPort: 18084
+        watchInbox: true
+        inboxDir: /tmp/ebproto/inbox
+        outboxDir: /tmp/ebproto/outbox
+        pollMs: 500
+        workspace: /root/workspace
+        asrEnabled: true
+        asrHost: 127.0.0.1
+        asrPort: 18082
+        asrToken: dshassist
+        routerEnabled: true
+        routerHost: 127.0.0.1
+        routerPort: 18086
+        routerModel: /sdcard/Download/Qwen3-0.6B-Q8_0.gguf

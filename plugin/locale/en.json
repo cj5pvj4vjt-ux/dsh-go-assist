@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Engine bridge",
+    "description": "Answers voice-assistant inbox turns inside the running engine process, and keeps the offline ASR and local model router running as engine children."
+  }
+}
